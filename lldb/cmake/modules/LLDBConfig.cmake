@@ -143,7 +143,11 @@ function(find_python_libs_windows_helper LOOKUP_DEBUG OUT_EXE_PATH_VARNAME OUT_L
 
   file(TO_CMAKE_PATH "${PYTHON_HOME}/python${POSTFIX}.exe"                       PYTHON_EXE)
   file(TO_CMAKE_PATH "${PYTHON_HOME}/libs/${PYTHONLIBS_BASE_NAME}${POSTFIX}.lib" PYTHON_LIB)
-  file(TO_CMAKE_PATH "${PYTHON_HOME}/${PYTHONLIBS_BASE_NAME}${POSTFIX}.dll"      PYTHON_DLL)
+  if(PYTHON_DLL_PATH_OVERWRITE)
+      file(TO_CMAKE_PATH "${PYTHON_DLL_PATH_OVERWRITE}/${PYTHONLIBS_BASE_NAME}${POSTFIX}.dll"      PYTHON_DLL)
+  else()
+      file(TO_CMAKE_PATH "${PYTHON_HOME}/${PYTHONLIBS_BASE_NAME}${POSTFIX}.dll"      PYTHON_DLL)
+  endif()
 
   foreach(component PYTHON_EXE;PYTHON_LIB;PYTHON_DLL)
     if(NOT EXISTS ${${component}})

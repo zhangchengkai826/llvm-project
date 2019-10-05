@@ -24,6 +24,10 @@
 #include <ntsecapi.h> // UNICODE_STRING
 #include <ntstatus.h>
 
+#if _MSC_VER && !__INTEL_COMPILER
+#pragma warning( disable: 4839 )
+#endif
+
 enum SYSTEM_INFORMATION_CLASS {
   SystemProcessInformation = 5
 }; // SYSTEM_INFORMATION_CLASS
